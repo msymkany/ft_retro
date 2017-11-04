@@ -17,12 +17,9 @@
 #include <ncurses.h>
 #include <vector>
 #include <string>
+#include "game.hpp"
+#include "UserShip.hpp"
 
-typedef struct
-{
-	int x;
-	int y;
-} Cord;
 
 class Field
 {
@@ -35,25 +32,34 @@ public:
 
 	Field &	operator=(const Field & some);
 
+
 	int get_score() const;
 	int get_lives() const;
 	int get_maxlives() const;
 	int get_cycles() const;
 
+	void 	play_game();
+	void	apd_screen();
+	void 	init_graph();
+	void 	take_live();
+	void	operator+=(int pt);
+
 
 
 private:
+	UserShip	*User;
 	int		_score;
 	int		_lives;
 	int		_maxlives;
 	int		_cycles;
-	Cord	_infoScreen;
-	Cord	_playScreen;
+	cordScreen	_infoScreen;
+	cordScreen	_playScreen;
 	WINDOW  *_field;
 	WINDOW	*_info;
 };
 
-void draw_borders(WINDOW *screen);
+//Field game;
+
 
 #endif
 

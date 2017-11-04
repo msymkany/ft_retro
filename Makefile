@@ -17,6 +17,8 @@ FL := -Wall -Wextra -Werror
 
 SOURCE := main.cpp \
           Field.cpp \
+          UserShip.cpp \
+          FlyingEssence.cpp \
 
 OBJECTS := $(SOURCE:.cpp=.o)
 

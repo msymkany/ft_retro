@@ -10,22 +10,13 @@
 //                                                                            //
 // ************************************************************************** //
 
-#include <iostream>
-#include <ncurses.h>
-#include <vector>
-#include <string>
+#include "game.hpp"
 #include "Field.hpp"
 
 int		main()
 {
 	Field game;
-	int ch = 0;
 
-	while (game.get_lives())
-	{
-		ch = getch();
-		if (ch == 'q')
-			exit (0);
-	}
+	game.play_game();
 	return 0;
 }

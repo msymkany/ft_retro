@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug
