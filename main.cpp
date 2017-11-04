@@ -11,9 +11,21 @@
 // ************************************************************************** //
 
 #include <iostream>
+#include <ncurses.h>
+#include <vector>
+#include <string>
+#include "Field.hpp"
 
 int		main()
 {
-	std::cout << "ft_retro in the making" << std::endl;
+	Field game;
+	int ch = 0;
+
+	while (game.get_lives())
+	{
+		ch = getch();
+		if (ch == 'q')
+			exit (0);
+	}
 	return 0;
 }

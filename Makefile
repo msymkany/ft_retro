@@ -16,13 +16,14 @@ CXX := @clang++
 FL := -Wall -Wextra -Werror
 
 SOURCE := main.cpp \
+          Field.cpp \
 
 OBJECTS := $(SOURCE:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-		@$(CXX) $(FL) $(OBJECTS) -o $(NAME)
+		@$(CXX) $(FL) $(OBJECTS) -o $(NAME) -lncurses
 		@echo "The project is ready"
 
 %.o: %.c
