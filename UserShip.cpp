@@ -48,7 +48,7 @@ void    UserShip::setYModulPosition(int y) {
 }
 
 bool    UserShip::hook(int in_char) {
-    mvprintw(0, 0, "%d", this->getModulPosition()->pos.y);
+//    mvprintw(0, 0, "%d", this->getModulPosition()->pos.y);
 	switch(in_char) {
 		case 'q':
 			return false;
