@@ -21,6 +21,7 @@ SOURCE := main.cpp \
           FlyingEssence.cpp \
           Bullet.cpp \
           EnemyShip.cpp \
+          Star.cpp \
 
 OBJECTS := $(SOURCE:.cpp=.o)
 

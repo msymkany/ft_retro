@@ -244,6 +244,33 @@ FlyingEssence.cpp.s:
 	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/FlyingEssence.cpp.s
 .PHONY : FlyingEssence.cpp.s
 
+Star.o: Star.cpp.o
+
+.PHONY : Star.o
+
+# target to build an object file
+Star.cpp.o:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Star.cpp.o
+.PHONY : Star.cpp.o
+
+Star.i: Star.cpp.i
+
+.PHONY : Star.i
+
+# target to preprocess a source file
+Star.cpp.i:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Star.cpp.i
+.PHONY : Star.cpp.i
+
+Star.s: Star.cpp.s
+
+.PHONY : Star.s
+
+# target to generate assembly for a file
+Star.cpp.s:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Star.cpp.s
+.PHONY : Star.cpp.s
+
 UserShip.o: UserShip.cpp.o
 
 .PHONY : UserShip.o
@@ -320,6 +347,9 @@ help:
 	@echo "... FlyingEssence.o"
 	@echo "... FlyingEssence.i"
 	@echo "... FlyingEssence.s"
+	@echo "... Star.o"
+	@echo "... Star.i"
+	@echo "... Star.s"
 	@echo "... UserShip.o"
 	@echo "... UserShip.i"
 	@echo "... UserShip.s"

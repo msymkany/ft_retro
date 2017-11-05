@@ -113,6 +113,7 @@ void Field::init_graph()
 	refresh();
 	wrefresh(_field);
 	wrefresh(_info);
+    t = clock();
 }
 
 void Field::apd_screen()
@@ -131,20 +132,24 @@ void Field::play_game() {
 	int in_char;
 	bool exit_requested = false;
 	while (1) {
+        t = std::clock() / 3000;
 		apd_screen();
 		in_char = wgetch(_field);
-//		mvprintw(0, 0, "%d", in_char); //test
+        mvprintw(0, 0, "%d", t);
 		User->putSpace(_field, User->getModulSize());
 		if (!User->hook(in_char))
 			exit_requested = true;
 		*User==_playScreen;
 		User->getMissile()->cleanFly(User->getMissile());
-        wattron(_field, COLOR_PAIR(4));
 		User->getMissile()->fly(User->getMissile(), this->_playScreen);
-        wattroff(_field, COLOR_PAIR(4));
-        this->putRandomEnemy();
-        this->enemy->cleanFly(this->enemy, this->random);
-        this->enemy->fly(this->enemy);
+        this->putRandomStar();
+        this->star->cleanFly(this->star, this->random_star);
+        this->star->fly(this->star);
+        if (t > 8) {
+            this->putRandomEnemy();
+            this->enemy->cleanFly(this->enemy, this->random);
+            this->enemy->fly(this->enemy);
+        }
 		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
@@ -154,7 +159,7 @@ void Field::play_game() {
 		usleep(10000); // 10 ms
 		refresh();
 	}
-	delete User;
+//	delete User;
 	if (!_lives)
 		game_over();
 }
@@ -164,7 +169,7 @@ void Field::putRandomEnemy() {
     int r;
 
     i = 0;
-    while (i < 2) {
+    while (i < 1) {
         r = rand() % 99;
         this->enemy[r].set_stoper(1);
         if (this->random[r] != 1)
@@ -172,6 +177,11 @@ void Field::putRandomEnemy() {
 			this->enemy[r].getModulPosition()->pos.y = rand() % 25 + 8;
 			this->random[r] = 1;
 		}
+        if (this->random[r] != 1) {
+            this->enemy[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
+            this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+        }
+        this->random[r] = 1;
         i++;
     }
 }
@@ -180,11 +190,12 @@ void Field::checkLives() {
 
 	for (int i = 0; i < 100; i++)
 	{
-		if (random[i])
+		if (enemy[i].get_stoper())
 		{
 			if (*User == enemy[i])
 			{
 				take_live();
+				enemy[i].set_stoper(0);
 				if (!_lives)
 					return ;
 			}
@@ -211,6 +222,31 @@ void Field::game_over() {
 		return;
 //	delwin(_field);
 //	delwin(_info);
+}
+
+void Field::putRandomStar() {
+    int i;
+    int r;
+
+    i = 0;
+    while (i < 1) {
+        r = rand() % 99;
+        this->star[r].set_stoper(1);
+        if (this->random_star[r] != 1) {
+            this->star[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
+            this->star[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+        }
+        this->random_star[r] = 1;
+        i++;
+    }
+}
+
+clock_t Field::getT() const {
+    return t;
+}
+
+void Field::setT(clock_t t) {
+    Field::t = t;
 }
 
 

@@ -20,6 +20,7 @@
 #include "game.hpp"
 #include "UserShip.hpp"
 #include "EnemyShip.h"
+#include "Star.h"
 
 
 class Field
@@ -47,11 +48,20 @@ public:
 	void	putRandomEnemy();
 	void 	checkLives();
 	void	game_over();
+    void	putRandomStar();
+
+	clock_t getT() const;
+
+	void setT(clock_t t);
+
 
 private:
 	UserShip	*User;
     EnemyShip enemy[100];
 	int 	random[100];
+    Star    star[100];
+    int 	random_star[100];
+	std::clock_t t;
 	int		_score;
 	int		_lives;
 	int		_maxlives;

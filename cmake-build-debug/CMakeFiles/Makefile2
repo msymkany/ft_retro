@@ -103,7 +103,7 @@ clean: CMakeFiles/ncurses.dir/clean
 CMakeFiles/rush00.dir/all:
 	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/depend
 	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target rush00"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target rush00"
 .PHONY : CMakeFiles/rush00.dir/all
 
 # Include target in all.
@@ -113,7 +113,7 @@ all: CMakeFiles/rush00.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rush00.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/rush00.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/rush00.dir/rule

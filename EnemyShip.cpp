@@ -6,8 +6,8 @@
 #include "game.hpp"
 
 EnemyShip::EnemyShip() : FlyingEssence::FlyingEssence(1), _stoper(0) {
-    modulPosition[0].pos.x = 150;
-    modulPosition[0].pos.y = 15;
+    modulPosition[0].pos.x = -10;
+    modulPosition[0].pos.y = -10;
     modulPosition[0].pos.disp_char = '@';
 }
 EnemyShip::~EnemyShip() {
