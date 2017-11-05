@@ -46,23 +46,9 @@ void    UserShip::setYModulPosition(int y) {
 		i++;
 	}
 }
-//void    UserShip::putModul(WINDOW *field) {
-//	int i;
-//	i = 0;
-//	while (i < 7) {
-//		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, modulPosition[i].pos.disp_char);
-//		i++;
-//	}
-//}
-//void     UserShip::putSpace(WINDOW *field) {
-//	int i;
-//	i = 0;
-//	while (i < 7) {
-//		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, ' ');
-//		i++;
-//	}
-//}
+
 bool    UserShip::hook(int in_char) {
+    mvprintw(0, 0, "%d", this->getModulPosition()->pos.y);
 	switch(in_char) {
 		case 'q':
 			return false;
@@ -98,7 +84,7 @@ void UserShip::operator==(cordScreen cord) {
 		} else if  (modulPosition[i].pos.x >= (cord.x - 1)) {
 			setXModulPosition(-1);
 			return;
-		} else if (modulPosition[i].pos.y <= 0) {
+		} else if (modulPosition[i].pos.y <= 4) {
 			setYModulPosition(1);
 			return;
 		} else if (modulPosition[i].pos.y >= (cord.y - 1)) {
@@ -117,7 +103,7 @@ void    UserShip::shot() {
 	if (_cout_missile > 199)
 		_cout_missile = 0;
 	missile[_cout_missile].getModulPosition()->pos.x = getModulPosition()[3].pos.x + 1;
-	missile[_cout_missile].getModulPosition()->pos.y = getModulPosition()[3].pos.y + 5;
+	missile[_cout_missile].getModulPosition()->pos.y = getModulPosition()[3].pos.y;
 	missile[_cout_missile].set_stoper(1);
 	_cout_missile++;
 }

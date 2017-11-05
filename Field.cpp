@@ -101,10 +101,10 @@ void Field::init_graph()
 	init_pair(4, COLOR_RED, COLOR_BLACK);
 
 	getmaxyx(stdscr, _playScreen.y, _playScreen.x);
-	_playScreen.y -= 5;
+//	_playScreen.y = 5;
 	_infoScreen.y = 5;
 	_infoScreen.x = _playScreen.x;
-	_field = newwin(_playScreen.y, _playScreen.x, 5, 0);
+	_field = newwin(_playScreen.y, _playScreen.x, 0, 0);
 	_info = newwin(_infoScreen.y, _infoScreen.x, 0, 0);
 	box(_field, 0, 0);
 	box(_info, 0, 0);
@@ -133,8 +133,9 @@ void Field::play_game() {
 	int in_char;
 	bool exit_requested = false;
 	while (1) {
+        checkLives();
         t = std::clock() / 3000;
-        mvprintw(0, 0, "%d", t);
+//        mvprintw(0, 0, "%d", t);
         if ((t % 5) == 0 && _scriptMark == 1) {
             _scriptMark = 0;
         }
@@ -166,14 +167,15 @@ void Field::play_game() {
         this->star->fly(this->star, this->_playScreen);
         if (t > 8) {
             this->putRandomEnemy();
-            this->enemy->cleanFly(this->enemy, this->random);
-            this->enemy->fly(this->enemy, _playScreen);
+//            this->enemy->cleanFly(this->enemy, this->random);
+//            this->enemy->fly(this->enemy, _playScreen);
         }
+        this->enemy->cleanFly(this->enemy, this->random);
+        this->enemy->fly(this->enemy, _playScreen);
 		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
         this->destroyObj(User->getMissile());
-		checkLives();
 		if (exit_requested) break;
 		if (!_lives) break;
 		usleep(10000); // 10 ms
@@ -196,7 +198,7 @@ void Field::putRandomEnemy() {
                 this->enemy[r].set_stoper(1);
                 if (this->random[r] != 1) {
                     this->enemy[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
-                    this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+                    this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 5;
                 }
                 this->random[r] = 1;
                 i++;
@@ -207,14 +209,17 @@ void Field::putRandomEnemy() {
 
 void Field::checkLives() {
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 150; i++)
 	{
-		if (enemy[i].get_stoper())
+		if (enemy[i].get_stoper() == 1)
 		{
 			if (*User == enemy[i])
 			{
 				take_live();
 				enemy[i].set_stoper(0);
+                mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
+                enemy[i].getModulPosition()->pos.x = this->_playScreen.x;
+                random[i] = 0;
 				if (!_lives)
 					return ;
 			}
@@ -253,7 +258,7 @@ void Field::putRandomStar() {
         this->star[r].set_stoper(1);
         if (this->random_star[r] != 1) {
             this->star[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
-            this->star[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+            this->star[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 5;
         }
         this->random_star[r] = 1;
         i++;
@@ -290,6 +295,8 @@ void Field::destroyObj(Bullet *missile) {
                     enemy[j].getModulPosition()[0].pos.y == missile[i].getModulPosition()[0].pos.y &&
                     enemy[j].get_stoper() != 0) {
                 enemy[j].set_stoper(0);
+//                missile[i].set_stoper(0);
+//                missile[i].getModulPosition()->pos.x = _playScreen.x - 2;
                 this->random[j] = 0;
                 enemy[j].getModulPosition()->pos.x = _playScreen.x - 2;
                 _score += 50;
