@@ -15,7 +15,7 @@
 
 //initialization
 
-Field::Field() : _script(5), _scriptMark(0), _score(0), _lives(3), _maxlives(3), _cycles(0)
+Field::Field() : _script(5), _scriptMark(0), _score(0), _lives(5), _maxlives(5)
 {
 	User = new UserShip;
 	init_graph();
@@ -39,7 +39,7 @@ Field::Field(const Field & some)
 
 Field &	Field::operator=(const Field & some)
 {
-    _cycles = some._cycles;
+    _lives = some._lives;
 	return *this;
 }
 
@@ -58,11 +58,6 @@ int Field::get_lives() const
 int Field::get_maxlives() const
 {
 	return _maxlives;
-}
-
-int Field::get_cycles() const
-{
-	return _cycles;
 }
 
 void Field::take_live()
@@ -155,7 +150,7 @@ void Field::apd_screen()
 {
 	mvwprintw(_info, 2, 20, "Score: %d", _score);
     mvwprintw(_info, 2, 45, "Lives: ");
-    mvwprintw(_info, 2, 52, "                                ");
+    mvwprintw(_info, 2, 52, "                                                          ");
     for (int i = 0; i < _lives; i++)
         mvwprintw(_info, 2, 52 + i * 3, " @ ");
 	wrefresh(_info);
@@ -170,7 +165,6 @@ void Field::play_game() {
 	while (1) {
         checkLives();
         t = std::clock() / 6000;
-        mvprintw(0, 0, "%d", get_script());
         if (t && (t % 5) == 0 && _scriptMark == 1) {
             _scriptMark = 0;
         }
@@ -297,13 +291,12 @@ void Field::game_over() {
 	wrefresh(_info);
 	wrefresh(_field);
 	box(stdscr, 0, 0);
-//	bkgd(COLOR_PAIR(1));
     mvwprintw(_stdwin, 14, 20, "Game over");
     mvwprintw(_stdwin, 16, 20, "Your score is: %d", _score);
     mvwprintw(_stdwin, 18, 20, "Press 'q' to quit");
     mvwprintw(_stdwin, 20, 20, "Press 'r' to start a new game");
     refresh();
-    usleep(1000000); // 10 ms
+    usleep(1000000);
 	while (1)
     {
         in_char = getch();
@@ -383,12 +376,8 @@ void Field::new_game() {
         random[i] = 0;
         enemy[i].set_stoper(0);
     }
-    mvwprintw(_stdwin, 14, 20, "         ");
-    mvwprintw(_stdwin, 16, 20, "                 ");
-    mvwprintw(_stdwin, 18, 20, "                 ");
-    mvwprintw(_stdwin, 20, 20, "                               ");
+    clear();
     User->newGamePos();
     init_win();
     play_game();
 }
-

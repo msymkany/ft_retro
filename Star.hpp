@@ -2,17 +2,16 @@
 // Created by Illia Lukianov on 11/5/17.
 //
 
-#ifndef RUSH00_STAR_H
-#define RUSH00_STAR_H
-
+#ifndef STAR_HPP_
+#define STAR_HPP_
 
 #include "FlyingEssence.hpp"
 
 class Star : public FlyingEssence {
 public:
     Star();
-    Star(const Star &);
-    Star& operator=(const Star &);
+    Star(const Star & n);
+    Star& operator=(const Star & n);
     virtual ~Star();
 
     int get_stoper() const;
@@ -26,4 +25,4 @@ private:
 };
 
 
-#endif //RUSH00_STAR_H
+#endif

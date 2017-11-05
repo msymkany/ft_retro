@@ -14,7 +14,11 @@ set(SOURCE_FILES
         FlyingEssence.cpp
         game.hpp
         Bullet.cpp
-        Bullet.h EnemyShip.cpp EnemyShip.h Star.cpp Star.h)
+        Bullet.hpp EnemyShip.cpp EnemyShip.hpp Star.cpp Star.hpp)
 
 add_executable(rush00 ${SOURCE_FILES})
 add_library(ncurses)
+
+FlyingEssence::FlyingEssence(player *mod, int part) : modulPosition(mod), modulSize(part) {
+modulPosition = new player[part];
+}
