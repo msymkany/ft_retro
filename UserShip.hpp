@@ -8,6 +8,7 @@
 
 //#include "FlyingEssence.hpp"
 #include "Bullet.h"
+#include "EnemyShip.h"
 
 //#include "Bullet.hpp"
 class UserShip : public FlyingEssence {
@@ -29,6 +30,8 @@ public:
 	int get_cout_missile() const;
 
 	void operator==(cordScreen cord);
+	bool operator==(EnemyShip & e) const;
+
 private:
 	Bullet missile[200];
 	int     _cout_missile;

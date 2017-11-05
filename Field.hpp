@@ -46,6 +46,8 @@ public:
 	void 	take_live();
 	void	operator+=(int pt);
 	void	putRandomEnemy();
+	void 	checkLives();
+	void	game_over();
     void	putRandomStar();
     void    destroyObj(Bullet *missile);
 
@@ -75,6 +77,7 @@ private:
 	cordScreen	_playScreen;
 	WINDOW  *_field;
 	WINDOW	*_info;
+	WINDOW	*_stdwin;
 };
 
 //Field game;

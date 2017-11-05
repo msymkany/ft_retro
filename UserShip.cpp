@@ -2,6 +2,7 @@
 // Created by Illia Lukianov on 11/4/17.
 //
 #include "UserShip.hpp"
+#include "game.hpp"
 //#include "game.hpp"
 
 UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
@@ -127,6 +128,20 @@ Bullet *UserShip::getMissile() {
 
 int UserShip::get_cout_missile() const {
 	return _cout_missile;
+}
+
+bool UserShip::operator==(EnemyShip &e) const
+{
+	for (int j = 0; j < 7; j++)
+	{
+		if (modulPosition[j].pos.x == e.getModulPosition()->pos.x &&
+				modulPosition[j].pos.y == e.getModulPosition()->pos.y)
+		{
+			mvprintw(0, 0, "%d", j); //test
+			return true;
+		}
+	}
+	return false;
 }
 
 

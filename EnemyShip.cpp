@@ -30,6 +30,7 @@ void EnemyShip::fly(EnemyShip *enemy, cordScreen _playScreen) {
         if (enemy[i].getModulPosition()->pos.x < 2) {
             enemy[i]._stoper = 0;
             enemy[i].modulPosition[0].pos.x = _playScreen.x - 2;
+
         }
         if (enemy[i]._stoper != 0) {
             enemy[i].modulPosition[0].pos.x--;
