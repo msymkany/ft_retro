@@ -19,6 +19,7 @@
 #include <string>
 #include "game.hpp"
 #include "UserShip.hpp"
+#include "EnemyShip.h"
 
 
 class Field
@@ -43,11 +44,13 @@ public:
 	void 	init_graph();
 	void 	take_live();
 	void	operator+=(int pt);
+	void	putRandomEnemy();
 
 
 
 private:
 	UserShip	*User;
+    EnemyShip enemy[50];
 	int		_score;
 	int		_lives;
 	int		_maxlives;

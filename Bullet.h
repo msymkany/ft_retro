@@ -17,13 +17,11 @@ public:
     virtual ~Bullet();
     void fly(Bullet *missile, cordScreen _playScreen);
     void cleanFly(Bullet *missile, cordScreen _playScreen);
+    void set_stoper(int _stoper);
+    int get_stoper() const;
 private:
     int		_stoper;
-public:
-    void set_stoper(int _stoper);
 
-public:
-    int get_stoper() const;
 };
 
 

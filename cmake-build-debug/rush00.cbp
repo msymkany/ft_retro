@@ -132,6 +132,12 @@
 		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/Bullet.h">
 			<Option target="rush00"/>
 		</Unit>
+		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/EnemyShip.cpp">
+			<Option target="rush00"/>
+		</Unit>
+		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/EnemyShip.h">
+			<Option target="rush00"/>
+		</Unit>
 		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/Field.cpp">
 			<Option target="rush00"/>
 		</Unit>

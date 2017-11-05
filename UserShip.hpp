@@ -19,9 +19,9 @@ public:
 	player *getModulPosition() const;
 	void setXModulPosition(int x);
 	void setYModulPosition(int y);
-	void putModul(WINDOW *field);
+//	void putModul(WINDOW *field);
 	bool hook(int in_char);
-	void putSpace(WINDOW *field);
+//	void putSpace(WINDOW *field);
 	void    shot();
 
 	Bullet *getMissile();

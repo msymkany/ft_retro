@@ -13,7 +13,14 @@ public:
 	FlyingEssence& operator=(const FlyingEssence &);
 	virtual ~FlyingEssence();
 	virtual player *getModulPosition() const;
+    void putModul(WINDOW *field, int size);
+    void putSpace(WINDOW *field, int size);
 protected:
 	player *modulPosition;
+    int modulSize;
+public:
+    int getModulSize() const;
+
+    void setModulSize(int modulSize);
 };
 #endif //RUSH00_FLYINGESSENCE_H

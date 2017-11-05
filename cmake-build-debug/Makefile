@@ -163,6 +163,33 @@ Bullet.cpp.s:
 	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Bullet.cpp.s
 .PHONY : Bullet.cpp.s
 
+EnemyShip.o: EnemyShip.cpp.o
+
+.PHONY : EnemyShip.o
+
+# target to build an object file
+EnemyShip.cpp.o:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/EnemyShip.cpp.o
+.PHONY : EnemyShip.cpp.o
+
+EnemyShip.i: EnemyShip.cpp.i
+
+.PHONY : EnemyShip.i
+
+# target to preprocess a source file
+EnemyShip.cpp.i:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/EnemyShip.cpp.i
+.PHONY : EnemyShip.cpp.i
+
+EnemyShip.s: EnemyShip.cpp.s
+
+.PHONY : EnemyShip.s
+
+# target to generate assembly for a file
+EnemyShip.cpp.s:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/EnemyShip.cpp.s
+.PHONY : EnemyShip.cpp.s
+
 Field.o: Field.cpp.o
 
 .PHONY : Field.o
@@ -284,6 +311,9 @@ help:
 	@echo "... Bullet.o"
 	@echo "... Bullet.i"
 	@echo "... Bullet.s"
+	@echo "... EnemyShip.o"
+	@echo "... EnemyShip.i"
+	@echo "... EnemyShip.s"
 	@echo "... Field.o"
 	@echo "... Field.i"
 	@echo "... Field.s"

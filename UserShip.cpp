@@ -4,8 +4,7 @@
 #include "UserShip.hpp"
 //#include "game.hpp"
 
-UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
-	attron(COLOR_PAIR(3));
+UserShip::UserShip() : _cout_missile(0), FlyingEssence::FlyingEssence(7) {
 	modulPosition[0].pos.x = 10;
 	modulPosition[0].pos.y = 15;
 	modulPosition[0].pos.disp_char = '/';
@@ -27,14 +26,13 @@ UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
 	modulPosition[6].pos.x = 10;
 	modulPosition[6].pos.y = 14;
 	modulPosition[6].pos.disp_char = '-';
-	attroff(COLOR_PAIR(10));
 }
 UserShip::~UserShip() {
 }
 void    UserShip::setXModulPosition(int x) {
 	int i;
 	i = 0;
-	while (i < 7) {
+	while (i < modulSize) {
 		modulPosition[i].pos.x += x;
 		i++;
 	}
@@ -42,27 +40,27 @@ void    UserShip::setXModulPosition(int x) {
 void    UserShip::setYModulPosition(int y) {
 	int i;
 	i = 0;
-	while (i < 7) {
+	while (i < modulSize) {
 		modulPosition[i].pos.y += y;
 		i++;
 	}
 }
-void    UserShip::putModul(WINDOW *field) {
-	int i;
-	i = 0;
-	while (i < 7) {
-		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, modulPosition[i].pos.disp_char);
-		i++;
-	}
-}
-void     UserShip::putSpace(WINDOW *field) {
-	int i;
-	i = 0;
-	while (i < 7) {
-		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, ' ');
-		i++;
-	}
-}
+//void    UserShip::putModul(WINDOW *field) {
+//	int i;
+//	i = 0;
+//	while (i < 7) {
+//		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, modulPosition[i].pos.disp_char);
+//		i++;
+//	}
+//}
+//void     UserShip::putSpace(WINDOW *field) {
+//	int i;
+//	i = 0;
+//	while (i < 7) {
+//		mvwaddch(field, modulPosition[i].pos.y, modulPosition[i].pos.x, ' ');
+//		i++;
+//	}
+//}
 bool    UserShip::hook(int in_char) {
 	switch(in_char) {
 		case 'q':

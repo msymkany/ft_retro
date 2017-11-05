@@ -6,7 +6,7 @@
 #include "game.hpp"
 #include "Field.hpp"
 
-Bullet::Bullet() : FlyingEssence::FlyingEssence(1), _stoper(0) {
+Bullet::Bullet() : _stoper(0), FlyingEssence::FlyingEssence(1) {
     modulPosition[0].pos.disp_char = '*';
     modulPosition[0].pos.x = -10;
     modulPosition[0].pos.y = -10;

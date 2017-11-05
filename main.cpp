@@ -15,6 +15,7 @@
 
 int		main()
 {
+	std::srand(std::time(0));
 	Field game;
 
 	game.play_game();
