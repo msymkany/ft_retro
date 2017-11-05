@@ -1,3 +1,4 @@
 /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles/edit_cache.dir
+/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles/ncurses.dir
 /nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug/CMakeFiles/rush00.dir

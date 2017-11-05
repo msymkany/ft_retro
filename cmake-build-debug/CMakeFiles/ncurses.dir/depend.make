@@ -1,2 +1,2 @@
-# Empty dependencies file for rush00_merg.
+# Empty dependencies file for ncurses.
 # This may be replaced when dependencies are built.

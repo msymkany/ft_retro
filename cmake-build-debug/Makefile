@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ncurses
+
+# Build rule for target.
+ncurses: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ncurses
+.PHONY : ncurses
+
+# fast build rule for target.
+ncurses/fast:
+	$(MAKE) -f CMakeFiles/ncurses.dir/build.make CMakeFiles/ncurses.dir/build
+.PHONY : ncurses/fast
+
+#=============================================================================
 # Target rules for targets named rush00
 
 # Build rule for target.
@@ -122,6 +135,33 @@ rush00: cmake_check_build_system
 rush00/fast:
 	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/build
 .PHONY : rush00/fast
+
+Bullet.o: Bullet.cpp.o
+
+.PHONY : Bullet.o
+
+# target to build an object file
+Bullet.cpp.o:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Bullet.cpp.o
+.PHONY : Bullet.cpp.o
+
+Bullet.i: Bullet.cpp.i
+
+.PHONY : Bullet.i
+
+# target to preprocess a source file
+Bullet.cpp.i:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Bullet.cpp.i
+.PHONY : Bullet.cpp.i
+
+Bullet.s: Bullet.cpp.s
+
+.PHONY : Bullet.s
+
+# target to generate assembly for a file
+Bullet.cpp.s:
+	$(MAKE) -f CMakeFiles/rush00.dir/build.make CMakeFiles/rush00.dir/Bullet.cpp.s
+.PHONY : Bullet.cpp.s
 
 Field.o: Field.cpp.o
 
@@ -239,7 +279,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... ncurses"
 	@echo "... rush00"
+	@echo "... Bullet.o"
+	@echo "... Bullet.i"
+	@echo "... Bullet.s"
 	@echo "... Field.o"
 	@echo "... Field.i"
 	@echo "... Field.s"

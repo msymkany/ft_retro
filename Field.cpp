@@ -96,6 +96,7 @@ void Field::init_graph()
 	init_pair(1, COLOR_BLUE, COLOR_BLACK);
 	init_pair(2, COLOR_CYAN, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
+	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
 	getmaxyx(stdscr, _playScreen.y, _playScreen.x);
 	_playScreen.y -= 5;
@@ -134,10 +135,8 @@ void Field::play_game() {
 		if (!User->hook(in_char))
 			exit_requested = true;
 		*User==_playScreen;
-//		if (User.getMissile()) {
-//			User.getMissile()->cleanFly();
-//			User.getMissile()->fly();
-//		}
+		User->getMissile()->cleanFly(User->getMissile(), this->_playScreen);
+		User->getMissile()->fly(User->getMissile(), this->_playScreen);
 		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field);
 		wattroff(_field, COLOR_PAIR(3));
@@ -146,3 +145,4 @@ void Field::play_game() {
 		refresh();
 	}
 }
+

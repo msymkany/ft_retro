@@ -189,17 +189,14 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
+//Dependencies for target
+ncurses_LIB_DEPENDS:STATIC=
+
 //Value Computed by CMake
 rush00_BINARY_DIR:STATIC=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug
 
 //Value Computed by CMake
 rush00_SOURCE_DIR:STATIC=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg
-
-//Value Computed by CMake
-rush00_merg_BINARY_DIR:STATIC=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/cmake-build-debug
-
-//Value Computed by CMake
-rush00_merg_SOURCE_DIR:STATIC=/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg
 
 
 ########################

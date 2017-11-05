@@ -5,7 +5,10 @@
 #define USERSHIP_HPP
 #include "game.hpp"
 
-#include "FlyingEssence.hpp"
+
+//#include "FlyingEssence.hpp"
+#include "Bullet.h"
+
 //#include "Bullet.hpp"
 class UserShip : public FlyingEssence {
 public:
@@ -19,11 +22,15 @@ public:
 	void putModul(WINDOW *field);
 	bool hook(int in_char);
 	void putSpace(WINDOW *field);
-//	void    shot();
-//	Bullet *getMissile() const;
+	void    shot();
+
+	Bullet *getMissile();
+
+	int get_cout_missile() const;
+
 	void operator==(cordScreen cord);
 private:
-//	Bullet *missile;
+	Bullet missile[200];
 	int     _cout_missile;
 //    bool operator!=(const UserShip &rhs) const;
 };

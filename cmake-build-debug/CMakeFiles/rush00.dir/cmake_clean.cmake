@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/rush00.dir/Field.cpp.o"
   "CMakeFiles/rush00.dir/UserShip.cpp.o"
   "CMakeFiles/rush00.dir/FlyingEssence.cpp.o"
+  "CMakeFiles/rush00.dir/Bullet.cpp.o"
   "rush00.pdb"
   "rush00"
 )
