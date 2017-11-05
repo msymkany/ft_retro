@@ -28,9 +28,19 @@ void Bullet::fly(Bullet *missile, cordScreen _playScreen) {
 //    if (modulPosition[0].pos.x >= cord.x - 1)
 //        delete(this);
     int i;
+    int j;
 
     i = 0;
+    j = 0;
     while (i < 200) {
+//        while (j < 150) {
+//            if (missile[i].getModulPosition()->pos.x == enemy[j].getModulPosition()->pos.x
+//                    && missile[i].getModulPosition()->pos.y == enemy[j].getModulPosition()->pos.y) {
+//                missile[i]._stoper = 0;
+//                enemy[j].set_stoper(0);
+//                j++;
+//            }
+//        }
         if (missile[i].getModulPosition()->pos.x > _playScreen.x - 3)
             missile[i]._stoper = 0;
         if (missile[i]._stoper != 0) {

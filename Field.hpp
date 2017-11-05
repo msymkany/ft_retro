@@ -47,18 +47,25 @@ public:
 	void	operator+=(int pt);
 	void	putRandomEnemy();
     void	putRandomStar();
+    void    destroyObj(Bullet *missile);
 
-	clock_t getT() const;
+    int get_script() const;
+
+    void set_script(int _script);
+
+    clock_t getT() const;
 
 	void setT(clock_t t);
 
 
 private:
 	UserShip	*User;
-    EnemyShip enemy[100];
-	int 	random[100];
+    EnemyShip enemy[150];
+	int 	random[150];
     Star    star[100];
     int 	random_star[100];
+    int     _script;
+    int     _scriptMark;
 	std::clock_t t;
 	int		_score;
 	int		_lives;

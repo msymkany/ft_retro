@@ -6,8 +6,8 @@
 #include "game.hpp"
 
 EnemyShip::EnemyShip() : FlyingEssence::FlyingEssence(1), _stoper(0) {
-    modulPosition[0].pos.x = -10;
-    modulPosition[0].pos.y = -10;
+    modulPosition[0].pos.x = -11;
+    modulPosition[0].pos.y = -11;
     modulPosition[0].pos.disp_char = '@';
 }
 EnemyShip::~EnemyShip() {
@@ -22,14 +22,14 @@ void EnemyShip::set_stoper(int _stoper) {
     EnemyShip::_stoper = _stoper;
 }
 
-void EnemyShip::fly(EnemyShip *enemy) {
+void EnemyShip::fly(EnemyShip *enemy, cordScreen _playScreen) {
     int i;
 
     i = 0;
-    while (i < 100) {
+    while (i < 150) {
         if (enemy[i].getModulPosition()->pos.x < 2) {
             enemy[i]._stoper = 0;
-            enemy[i].modulPosition[0].pos.x = 150;
+            enemy[i].modulPosition[0].pos.x = _playScreen.x - 2;
         }
         if (enemy[i]._stoper != 0) {
             enemy[i].modulPosition[0].pos.x--;
@@ -43,7 +43,7 @@ void EnemyShip::cleanFly(EnemyShip *enemy, int *random) {
     int i;
 
     i = 0;
-    while (i < 100) {
+    while (i < 150) {
         if (enemy[i]._stoper != 0 && random[i] == 1) {
             mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
         }

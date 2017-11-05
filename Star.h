@@ -18,7 +18,7 @@ public:
     int get_stoper() const;
 
     void set_stoper(int _stoper);
-    void fly(Star *enemyy);
+    void fly(Star *enemyy, cordScreen _playScreen);
     void cleanFly(Star *enemyy, int *random);
 
 private:

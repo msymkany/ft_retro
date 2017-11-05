@@ -6,6 +6,7 @@
 #define RUSH00_BULLET_H
 
 #include "FlyingEssence.hpp"
+#include "EnemyShip.h"
 //#include "Field.hpp"
 
 class Bullet : public FlyingEssence {

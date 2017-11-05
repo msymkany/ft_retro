@@ -22,14 +22,14 @@ void Star::set_stoper(int _stoper) {
     Star::_stoper = _stoper;
 }
 
-void Star::fly(Star *star) {
+void Star::fly(Star *star, cordScreen _playScreen) {
     int i;
 
     i = 0;
     while (i < 100) {
         if (star[i].getModulPosition()->pos.x < 2) {
             star[i]._stoper = 0;
-            star[i].modulPosition[0].pos.x = 150;
+            star[i].modulPosition[0].pos.x = _playScreen.x - 2;
         }
         if (star[i]._stoper != 0) {
             star[i].modulPosition[0].pos.x--;

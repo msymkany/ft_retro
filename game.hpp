@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <string>
 #include <iostream>
+#define ENEMY 200
 //#include "Field.hpp"
 //#include "UserShip.hpp"
 //#include "FlyingEssence.hpp"
