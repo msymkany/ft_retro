@@ -2,9 +2,7 @@
 // Created by Illia Lukianov on 11/4/17.
 //
 
-#include "Bullet.h"
-#include "game.hpp"
-#include "Field.hpp"
+#include "Bullet.hpp"
 
 Bullet::Bullet() : FlyingEssence::FlyingEssence(1) {
     modulPosition[0].pos.disp_char = '*';
@@ -12,13 +10,14 @@ Bullet::Bullet() : FlyingEssence::FlyingEssence(1) {
     modulPosition[0].pos.y = -10;
 }
 
-//Bullet::Bullet(const Bullet &) {
-//
-//}
+Bullet::Bullet(const Bullet & b) {
+    *this = b;
+}
 
-//Bullet &Bullet::operator=(const Bullet &) {
-//    return <#initializer#>;
-//}
+Bullet &Bullet::operator=(const Bullet & b) {
+    _stoper = b._stoper;
+    return *this;
+}
 
 Bullet::~Bullet() {
 

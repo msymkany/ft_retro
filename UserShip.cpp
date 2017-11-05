@@ -2,13 +2,19 @@
 // Created by Illia Lukianov on 11/4/17.
 //
 #include "UserShip.hpp"
-#include "game.hpp"
-//#include "game.hpp"
 
 UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
     newGamePos();
 }
 
+UserShip::UserShip(const UserShip & u) {
+    *this = u;
+}
+
+UserShip &UserShip::operator=(const UserShip & u) {
+    _cout_missile = u._cout_missile;
+    return *this;
+}
 
 UserShip::~UserShip() {
 }
@@ -30,7 +36,6 @@ void    UserShip::setYModulPosition(int y) {
 }
 
 bool    UserShip::hook(int in_char) {
-//    mvprintw(0, 0, "%d", this->getModulPosition()->pos.y);
 	switch(in_char) {
 		case 'q':
 			return false;
@@ -135,10 +140,3 @@ void UserShip::newGamePos() {
     modulPosition[6].pos.y = 14;
     modulPosition[6].pos.disp_char = '-';
 }
-
-
-//    modulPosition[0].pos.x = getModulPosition()[3].pos.x + 1;
-//    modulPosition[0].pos.y = getModulPosition()[3].pos.y;
-//bool UserShip::operator!=(const UserShip &rhs) const {
-//    return !(rhs == *this);
-//}

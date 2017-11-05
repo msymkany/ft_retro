@@ -19,26 +19,22 @@
 #include <string>
 #include "game.hpp"
 #include "UserShip.hpp"
-#include "EnemyShip.h"
-#include "Star.h"
-
+#include "EnemyShip.hpp"
+#include "Star.hpp"
+#include "Bullet.hpp"
 
 class Field
 {
 public:
 	Field();
-
-	~Field();
-
+	virtual ~Field();
 	Field(const Field & some);
-
 	Field &	operator=(const Field & some);
 
 
 	int get_score() const;
 	int get_lives() const;
 	int get_maxlives() const;
-	int get_cycles() const;
 
 	void 	play_game();
 	void	apd_screen();
@@ -78,16 +74,12 @@ private:
 	int		_score;
 	int		_lives;
 	int		_maxlives;
-	int		_cycles;
 	cordScreen	_infoScreen;
 	cordScreen	_playScreen;
 	WINDOW  *_field;
 	WINDOW	*_info;
 	WINDOW	*_stdwin;
 };
-
-//Field game;
-
 
 #endif
 

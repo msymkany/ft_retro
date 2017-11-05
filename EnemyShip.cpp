@@ -2,14 +2,23 @@
 // Created by Illia Lukianov on 11/5/17.
 //
 
-#include "EnemyShip.h"
-#include "game.hpp"
+#include "EnemyShip.hpp"
 
 EnemyShip::EnemyShip() : FlyingEssence::FlyingEssence(1), _stoper(0) {
     modulPosition[0].pos.x = -11;
     modulPosition[0].pos.y = -11;
     modulPosition[0].pos.disp_char = '@';
 }
+
+EnemyShip::EnemyShip(const EnemyShip & es) {
+    *this = es;
+}
+
+EnemyShip &EnemyShip::operator=(const EnemyShip & es) {
+    _stoper = es._stoper;
+    return *this;
+}
+
 EnemyShip::~EnemyShip() {
 
 }
@@ -51,3 +60,4 @@ void EnemyShip::cleanFly(EnemyShip *enemy, int *random) {
         i++;
     }
 }
+

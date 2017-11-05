@@ -2,16 +2,25 @@
 // Created by Illia Lukianov on 11/5/17.
 //
 
-#include "Star.h"
-#include "game.hpp"
+#include "Star.hpp"
 
 Star::Star() : FlyingEssence::FlyingEssence(1), _stoper(0) {
     modulPosition[0].pos.x = -10;
     modulPosition[0].pos.y = -10;
     modulPosition[0].pos.disp_char = '-';
 }
-Star::~Star() {
 
+Star::Star(const Star & n) {
+    *this = n;
+}
+
+Star &Star::operator=(const Star & n) {
+    _stoper = n._stoper;
+    return *this;
+}
+
+Star::~Star() {
+    return ;
 }
 
 int Star::get_stoper() const {

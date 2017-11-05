@@ -4,25 +4,19 @@
 #ifndef USERSHIP_HPP
 #define USERSHIP_HPP
 #include "game.hpp"
+#include "Bullet.hpp"
+#include "EnemyShip.hpp"
 
-
-//#include "FlyingEssence.hpp"
-#include "Bullet.h"
-#include "EnemyShip.h"
-
-//#include "Bullet.hpp"
 class UserShip : public FlyingEssence {
 public:
 	UserShip();
-	UserShip(const UserShip &);
-	UserShip& operator=(const UserShip &);
+	UserShip(const UserShip & u);
+	UserShip& operator=(const UserShip & u);
 	virtual ~UserShip();
 	player *getModulPosition() const;
 	void setXModulPosition(int x);
 	void setYModulPosition(int y);
-//	void putModul(WINDOW *field);
 	bool hook(int in_char);
-//	void putSpace(WINDOW *field);
 	void    shot();
 
 	Bullet *getMissile();
@@ -35,6 +29,5 @@ public:
 private:
 	Bullet missile[200];
 	int     _cout_missile;
-//    bool operator!=(const UserShip &rhs) const;
 };
-#endif //RUSH00_USERSHIP_H
+#endif
