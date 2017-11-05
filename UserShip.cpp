@@ -82,12 +82,18 @@ player *UserShip::getModulPosition() const {
 
 void    UserShip::shot() {
 //	missile = new Bullet;
-	if (_cout_missile > 199)
-		_cout_missile = 0;
-	missile[_cout_missile].getModulPosition()->pos.x = getModulPosition()[3].pos.x + 1;
-	missile[_cout_missile].getModulPosition()->pos.y = getModulPosition()[3].pos.y;
-	missile[_cout_missile].set_stoper(1);
-	_cout_missile++;
+    static clock_t mtime = 0;
+    clock_t curr = clock();
+
+    if(curr - mtime > 2000) {
+        mtime = curr;
+        if (_cout_missile > 199)
+            _cout_missile = 0;
+        missile[_cout_missile].getModulPosition()->pos.x = getModulPosition()[3].pos.x + 1;
+        missile[_cout_missile].getModulPosition()->pos.y = getModulPosition()[3].pos.y;
+        missile[_cout_missile].set_stoper(1);
+        _cout_missile++;
+    }
 }
 
 Bullet *UserShip::getMissile() {

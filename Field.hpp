@@ -79,6 +79,7 @@ private:
 	int		_lives;
 	int		_maxlives;
 	int		_cycles;
+    int     _dificult;
 	cordScreen	_infoScreen;
 	cordScreen	_playScreen;
 	WINDOW  *_field;

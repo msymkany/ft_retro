@@ -34,7 +34,8 @@ void EnemyShip::fly(EnemyShip *enemy, cordScreen _playScreen) {
         }
         if (enemy[i]._stoper != 0) {
             enemy[i].modulPosition[0].pos.x--;
-            mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, enemy[i].getModulPosition()->pos.disp_char);
+            mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x,
+                    enemy[i].getModulPosition()->pos.disp_char);
         }
         i++;
     }

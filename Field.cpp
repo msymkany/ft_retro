@@ -95,9 +95,42 @@ void Field::init_graph()
     init_pair(2, COLOR_CYAN, COLOR_BLACK);
     init_pair(3, COLOR_WHITE, COLOR_BLACK);
     init_pair(4, COLOR_RED, COLOR_BLACK);
-
-//    while ()
     getmaxyx(stdscr, _playScreen.y, _playScreen.x);
+    int in_char;
+    while (1) {
+        mvprintw(_playScreen.y / 2, _playScreen.x / 2 - 10, "%s", "Hello!");
+        mvprintw(_playScreen.y / 2 + 1, _playScreen.x / 2 - 10, "%s", "Wanna play a little game?");
+        mvprintw(_playScreen.y / 2 + 3, _playScreen.x / 2 - 10, "%s", "Contols:");
+        mvprintw(_playScreen.y / 2 + 4, _playScreen.x / 2 - 10, "%s", "Arrow Up/Down");
+        mvprintw(_playScreen.y / 2 + 5, _playScreen.x / 2 - 10, "%s", "Arrow Left/Right");
+        mvprintw(_playScreen.y / 2 + 6, _playScreen.x / 2 - 10, "%s", "Space: Fire!");
+        mvprintw(_playScreen.y / 2 + 7, _playScreen.x / 2 - 10, "%s", "q: Quit!");
+        mvprintw(_playScreen.y / 2 + 9, _playScreen.x / 2 - 10, "%s", "Select difficulty:");
+        mvprintw(_playScreen.y / 2 + 10, _playScreen.x / 2 - 8, "%s", "1:Easy");
+        mvprintw(_playScreen.y / 2 + 10, _playScreen.x / 2, "%s", "2:Medium");
+        mvprintw(_playScreen.y / 2 + 10, _playScreen.x / 2 + 10, "%s", "3:Hard");
+        mvprintw(_playScreen.y / 2 + 10, _playScreen.x / 2 + 20, "%s", "4:Hmmmm...");
+        in_char = wgetch(_stdwin);
+        if (in_char == '1') {
+            _dificult = 2;
+            break ;
+        }
+        else if (in_char == '2') {
+            _dificult = 5;
+            break;
+        }
+        else if (in_char == '3') {
+            _dificult = 10;
+            break;
+        }
+        else if (in_char == '4') {
+            _dificult = 15;
+            break;
+        }
+        else if (in_char == 'q')
+            exit(0);
+    }
+    clear();
     _infoScreen.y = 5;
     _infoScreen.x = _playScreen.x;
     _field = newwin(_playScreen.y, _playScreen.x, 0, 0);
@@ -137,20 +170,20 @@ void Field::play_game() {
 	while (1) {
         checkLives();
         t = std::clock() / 6000;
-        mvprintw(0, 0, "%d", t);
-        if ((t % 5) == 0 && _scriptMark == 1) {
+        mvprintw(0, 0, "%d", get_script());
+        if (t && (t % 5) == 0 && _scriptMark == 1) {
             _scriptMark = 0;
         }
-        if ((t % 40) == 0 && get_script() > 0 && _scriptMark == 0) {
+        if (t && (t % 40) == 0 && get_script() > 0 && _scriptMark == 0) {
             set_script(1);
             _scriptMark = 1;
-        } else if ((t % 30) == 0 && get_script() > 0 && _scriptMark == 0) {
+        } else if (t && (t % 30) == 0 && get_script() > 0 && _scriptMark == 0) {
             set_script(2);
             _scriptMark = 1;
-        } else if ((t % 20) == 0 && get_script() > 0 && _scriptMark == 0) {
+        } else if (t && (t % 20) == 0 && get_script() > 0 && _scriptMark == 0) {
             set_script(3);
             _scriptMark = 1;
-        } else if ((t % 10) == 0 && get_script() > 0 && _scriptMark == 0) {
+        } else if (t && (t % 10) == 0 && get_script() > 0 && _scriptMark == 0) {
             set_script(4);
             _scriptMark = 1;
         }
@@ -193,12 +226,12 @@ void Field::putRandomEnemy() {
     i = 0;
     if (get_script() != 0) {
         if ((this->t % get_script()) == 0) {
-            while (i < 2) {
+            while (i < _dificult) {
                 r = rand() % 149;
                 this->enemy[r].set_stoper(1);
                 if (this->random[r] != 1) {
                     this->enemy[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
-                    this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+                    this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 5;
                 }
                 this->random[r] = 1;
                 i++;
@@ -328,6 +361,10 @@ void Field::destroyObj(Bullet *missile) {
                     enemy[j].getModulPosition()[0].pos.y == missile[i].getModulPosition()[0].pos.y &&
                     enemy[j].get_stoper() != 0) {
                 enemy[j].set_stoper(0);
+                missile[i].set_stoper(0);
+                missile[i].getModulPosition()->pos.x = -10;
+                mvaddch(missile[i].getModulPosition()->pos.y, missile[i].getModulPosition()->pos.x, ' ');
+                mvaddch(enemy[j].getModulPosition()->pos.y, enemy[j].getModulPosition()->pos.x, ' ');
                 this->random[j] = 0;
                 enemy[j].getModulPosition()->pos.x = _playScreen.x - 2;
                 _score += 50;
