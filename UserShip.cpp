@@ -4,7 +4,7 @@
 #include "UserShip.hpp"
 //#include "game.hpp"
 
-UserShip::UserShip() : _cout_missile(0), FlyingEssence::FlyingEssence(7) {
+UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
 	modulPosition[0].pos.x = 10;
 	modulPosition[0].pos.y = 15;
 	modulPosition[0].pos.disp_char = '/';

@@ -16,7 +16,7 @@ public:
 
     virtual ~Bullet();
     void fly(Bullet *missile, cordScreen _playScreen);
-    void cleanFly(Bullet *missile, cordScreen _playScreen);
+    void cleanFly(Bullet *missile);
     void set_stoper(int _stoper);
     int get_stoper() const;
 private:

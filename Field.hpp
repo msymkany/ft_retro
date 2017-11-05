@@ -50,7 +50,8 @@ public:
 
 private:
 	UserShip	*User;
-    EnemyShip enemy[50];
+    EnemyShip enemy[100];
+	int 	random[100];
 	int		_score;
 	int		_lives;
 	int		_maxlives;

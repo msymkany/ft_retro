@@ -6,7 +6,7 @@
 #include "game.hpp"
 #include "Field.hpp"
 
-Bullet::Bullet() : _stoper(0), FlyingEssence::FlyingEssence(1) {
+Bullet::Bullet() : FlyingEssence::FlyingEssence(1) {
     modulPosition[0].pos.disp_char = '*';
     modulPosition[0].pos.x = -10;
     modulPosition[0].pos.y = -10;
@@ -41,7 +41,7 @@ void Bullet::fly(Bullet *missile, cordScreen _playScreen) {
     }
 }
 
-void Bullet::cleanFly(Bullet *missile, cordScreen _playScreen) {
+void Bullet::cleanFly(Bullet *missile) {
     int i;
 
     i = 0;

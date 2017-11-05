@@ -26,9 +26,11 @@ void EnemyShip::fly(EnemyShip *enemy) {
     int i;
 
     i = 0;
-    while (i < 50) {
-        if (enemy[i].getModulPosition()->pos.x < 3)
+    while (i < 100) {
+        if (enemy[i].getModulPosition()->pos.x < 2) {
             enemy[i]._stoper = 0;
+            enemy[i].modulPosition[0].pos.x = 150;
+        }
         if (enemy[i]._stoper != 0) {
             enemy[i].modulPosition[0].pos.x--;
             mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, enemy[i].getModulPosition()->pos.disp_char);
@@ -37,13 +39,13 @@ void EnemyShip::fly(EnemyShip *enemy) {
     }
 }
 
-void EnemyShip::cleanFly(EnemyShip *enemy) {
+void EnemyShip::cleanFly(EnemyShip *enemy, int *random) {
     int i;
 
     i = 0;
-    while (i < 50) {
-        if (enemy[i]._stoper != 0) {
-            mvaddch(enemy[i].getModulPosition()->pos.y - 1, enemy[i].getModulPosition()->pos.x - 1, ' ');
+    while (i < 100) {
+        if (enemy[i]._stoper != 0 && random[i] == 1) {
+            mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
         }
         i++;
     }

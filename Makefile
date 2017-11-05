@@ -30,7 +30,7 @@ $(NAME): $(OBJECTS)
 		@$(CXX) $(FL) $(OBJECTS) -o $(NAME) -lncurses
 		@echo "The project is ready"
 
-%.o: %.c
+%.o: %.cpp
 	$(CXX) $(FL) -c $< -o $@
 
 .PHONY: clean fclean re

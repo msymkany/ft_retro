@@ -38,7 +38,7 @@ Field::Field(const Field & some)
 
 Field &	Field::operator=(const Field & some)
 {
-
+    _cycles = some._cycles;
 	return *this;
 }
 
@@ -136,11 +136,13 @@ void Field::play_game() {
 		if (!User->hook(in_char))
 			exit_requested = true;
 		*User==_playScreen;
-		User->getMissile()->cleanFly(User->getMissile(), this->_playScreen);
+		User->getMissile()->cleanFly(User->getMissile());
+        wattron(_field, COLOR_PAIR(4));
 		User->getMissile()->fly(User->getMissile(), this->_playScreen);
+        wattroff(_field, COLOR_PAIR(4));
         this->putRandomEnemy();
+        this->enemy->cleanFly(this->enemy, this->random);
         this->enemy->fly(this->enemy);
-        this->enemy->cleanFly(this->enemy);
 		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
@@ -155,10 +157,12 @@ void Field::putRandomEnemy() {
     int r;
 
     i = 0;
-    while (i < 3) {
-        r = rand() % 49;
+    while (i < 2) {
+        r = rand() % 99;
         this->enemy[r].set_stoper(1);
-        this->enemy[r].getModulPosition()->pos.y = rand() % 20 + 10;
+        if (this->random[r] != 1)
+            this->enemy[r].getModulPosition()->pos.y = rand() % 25 + 8;
+        this->random[r] = 1;
         i++;
     }
 }

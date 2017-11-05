@@ -19,7 +19,7 @@ public:
 
     void set_stoper(int _stoper);
     void fly(EnemyShip *enemyy);
-    void cleanFly(EnemyShip *enemyy);
+    void cleanFly(EnemyShip *enemyy, int *random);
 
 private:
     int _stoper;
