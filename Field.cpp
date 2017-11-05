@@ -18,7 +18,6 @@
 Field::Field() : _script(5), _scriptMark(0), _score(0), _lives(3), _maxlives(3), _cycles(0)
 {
 	User = new UserShip;
-//    this->_script = 5;
 	init_graph();
 	apd_screen();
 	return;
@@ -99,7 +98,6 @@ void Field::init_graph()
 
 //    while ()
     getmaxyx(stdscr, _playScreen.y, _playScreen.x);
-//	_playScreen.y -= 5;
     _infoScreen.y = 5;
     _infoScreen.x = _playScreen.x;
     _field = newwin(_playScreen.y, _playScreen.x, 0, 0);
@@ -137,7 +135,8 @@ void Field::play_game() {
 	int in_char;
 	bool exit_requested = false;
 	while (1) {
-        t = std::clock() / 3000;
+        checkLives();
+        t = std::clock() / 6000;
         mvprintw(0, 0, "%d", t);
         if ((t % 5) == 0 && _scriptMark == 1) {
             _scriptMark = 0;
@@ -155,10 +154,8 @@ void Field::play_game() {
             set_script(4);
             _scriptMark = 1;
         }
-
 		apd_screen();
 		in_char = wgetch(_field);
-//        mvprintw(0, 0, "%d", get_script());
 		User->putSpace(_field, User->getModulSize());
 		if (!User->hook(in_char))
 			exit_requested = true;
@@ -170,20 +167,21 @@ void Field::play_game() {
         this->star->fly(this->star, this->_playScreen);
         if (t > 8) {
             this->putRandomEnemy();
-            this->enemy->cleanFly(this->enemy, this->random);
-            this->enemy->fly(this->enemy, _playScreen);
         }
-        wattron(_field, COLOR_PAIR(3));
+        if (t && (t % 70) == 0) {
+            this->putBoos();
+        }
+        this->clearBoos();
+        this->enemy->cleanFly(this->enemy, this->random);
+        this->enemy->fly(this->enemy, _playScreen);
+		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
         this->destroyObj(User->getMissile());
-		checkLives();
 		if (exit_requested) break;
 		if (!_lives) break;
-		usleep(10000); // 10 ms
 		refresh();
 	}
-//	delete User;
 	if (!_lives)
 		game_over();
 }
@@ -201,8 +199,8 @@ void Field::putRandomEnemy() {
                 if (this->random[r] != 1) {
                     this->enemy[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
                     this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
-                    this->random[r] = 1;
                 }
+                this->random[r] = 1;
                 i++;
             }
         }
@@ -211,20 +209,48 @@ void Field::putRandomEnemy() {
 
 void Field::checkLives() {
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 150; i++)
 	{
-		if (enemy[i].get_stoper())
+		if (enemy[i].get_stoper() == 1)
 		{
 			if (*User == enemy[i])
 			{
 				take_live();
 				enemy[i].set_stoper(0);
+                mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
+                enemy[i].getModulPosition()->pos.x = this->_playScreen.x;
                 random[i] = 0;
 				if (!_lives)
 					return ;
 			}
 		}
 	}
+}
+
+void Field::putBoos() {
+    int i;
+
+    i = 5;
+    while (i < _playScreen.y - 1) {
+        mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
+        this->enemy[i].getModulPosition()->pos.y = i;
+        this->enemy[i].getModulPosition()->pos.x = _playScreen.x - 2;
+        this->enemy[i].set_stoper(1);
+        this->boss[i] = 1;
+        this->random[i] = 1;
+        i++;
+    }
+}
+
+void Field::clearBoos() {
+    int i;
+
+    i = 5;
+    while (i < 150) {
+        if (this->boss[i] == 1)
+            mvaddch(enemy[i].getModulPosition()->pos.y, enemy[i].getModulPosition()->pos.x, ' ');
+        i++;
+    }
 }
 
 void Field::game_over() {
@@ -265,8 +291,8 @@ void Field::putRandomStar() {
         r = rand() % 99;
         this->star[r].set_stoper(1);
         if (this->random_star[r] != 1) {
-            this->star[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
-            this->star[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+            this->star[r].getModulPosition()->pos.x = rand() % (_playScreen.x - 6) + 5;
+            this->star[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 5;
         }
         this->random_star[r] = 1;
         i++;

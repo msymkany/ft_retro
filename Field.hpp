@@ -50,6 +50,8 @@ public:
 	void 	checkLives();
 	void	game_over();
     void	putRandomStar();
+    void    putBoos();
+    void    clearBoos();
     void    destroyObj(Bullet *missile);
 	void	new_game();
 
@@ -67,6 +69,7 @@ private:
 	UserShip	*User;
     EnemyShip enemy[150];
 	int 	random[150];
+    int     boss[150];
     Star    star[100];
     int 	random_star[100];
     int     _script;
