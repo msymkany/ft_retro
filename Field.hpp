@@ -45,8 +45,8 @@ public:
 	void 	take_live();
 	void	operator+=(int pt);
 	void	putRandomEnemy();
-
-
+	void 	checkLives();
+	void	game_over();
 
 private:
 	UserShip	*User;
@@ -60,6 +60,7 @@ private:
 	cordScreen	_playScreen;
 	WINDOW  *_field;
 	WINDOW	*_info;
+	WINDOW	*_stdwin;
 };
 
 //Field game;

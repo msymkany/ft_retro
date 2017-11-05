@@ -28,7 +28,7 @@ void EnemyShip::fly(EnemyShip *enemy) {
     i = 0;
     while (i < 100) {
         if (enemy[i].getModulPosition()->pos.x < 2) {
-            enemy[i]._stoper = 0;
+			enemy[i]._stoper = 0;
             enemy[i].modulPosition[0].pos.x = 150;
         }
         if (enemy[i]._stoper != 0) {

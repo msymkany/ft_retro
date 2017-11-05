@@ -67,6 +67,7 @@ int Field::get_cycles() const
 void Field::take_live()
 {
 	_lives -= 1;
+	mvprintw(3, 15, "Lives %d", _lives); //test
 }
 
 void Field::operator+=(int pt)
@@ -83,7 +84,7 @@ void Field::operator+=(int pt)
 
 void Field::init_graph()
 {
-	initscr();
+	_stdwin = initscr();
 	cbreak();
 	start_color();
 	keypad(stdscr, TRUE);
@@ -122,6 +123,7 @@ void Field::apd_screen()
 		waddstr(_info, " @ ");
 	wrefresh(_info);
 	wrefresh(_field);
+	refresh();
 }
 
 void Field::play_game() {
@@ -131,7 +133,7 @@ void Field::play_game() {
 	while (1) {
 		apd_screen();
 		in_char = wgetch(_field);
-        mvprintw(0, 0, "%d", in_char);
+//		mvprintw(0, 0, "%d", in_char); //test
 		User->putSpace(_field, User->getModulSize());
 		if (!User->hook(in_char))
 			exit_requested = true;
@@ -146,10 +148,15 @@ void Field::play_game() {
 		wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
+		checkLives();
 		if (exit_requested) break;
+		if (!_lives) break;
 		usleep(10000); // 10 ms
 		refresh();
 	}
+	delete User;
+	if (!_lives)
+		game_over();
 }
 
 void Field::putRandomEnemy() {
@@ -161,9 +168,49 @@ void Field::putRandomEnemy() {
         r = rand() % 99;
         this->enemy[r].set_stoper(1);
         if (this->random[r] != 1)
-            this->enemy[r].getModulPosition()->pos.y = rand() % 25 + 8;
-        this->random[r] = 1;
+		{
+			this->enemy[r].getModulPosition()->pos.y = rand() % 25 + 8;
+			this->random[r] = 1;
+		}
         i++;
     }
 }
+
+void Field::checkLives() {
+
+	for (int i = 0; i < 100; i++)
+	{
+		if (random[i])
+		{
+			if (*User == enemy[i])
+			{
+				take_live();
+				if (!_lives)
+					return ;
+			}
+		}
+	}
+}
+
+void Field::game_over() {
+
+	int in_char;
+	wclear(_field);
+	wclear(_info);
+	clear();
+	wrefresh(_info);
+	wrefresh(_field);
+	box(stdscr, 0, 0);
+//	bkgd(COLOR_PAIR(1));
+	mvwprintw(_stdwin, 14, 20, "Game over");
+	refresh();
+	usleep(1000000); // 10 ms
+	in_char = wgetch(_stdwin);
+	halfdelay(30);
+	if (in_char == 'q')
+		return;
+//	delwin(_field);
+//	delwin(_info);
+}
+
 
