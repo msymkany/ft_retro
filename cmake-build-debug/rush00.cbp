@@ -150,6 +150,12 @@
 		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/FlyingEssence.hpp">
 			<Option target="rush00"/>
 		</Unit>
+		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/Star.cpp">
+			<Option target="rush00"/>
+		</Unit>
+		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/Star.h">
+			<Option target="rush00"/>
+		</Unit>
 		<Unit filename="/nfs/2016/i/ilukaino/Documents/code/c++/clion/rush00_merg/UserShip.cpp">
 			<Option target="rush00"/>
 		</Unit>
