@@ -26,7 +26,7 @@ public:
 	void    shot();
 
 	Bullet *getMissile();
-
+    void newGamePos();
 	int get_cout_missile() const;
 
 	void operator==(cordScreen cord);

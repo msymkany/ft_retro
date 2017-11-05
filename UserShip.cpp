@@ -6,28 +6,10 @@
 //#include "game.hpp"
 
 UserShip::UserShip() : FlyingEssence::FlyingEssence(7), _cout_missile(0) {
-	modulPosition[0].pos.x = 10;
-	modulPosition[0].pos.y = 15;
-	modulPosition[0].pos.disp_char = '/';
-	modulPosition[1].pos.x = 9;
-	modulPosition[1].pos.y = 14;
-	modulPosition[1].pos.disp_char = '=';
-	modulPosition[2].pos.x = 10;
-	modulPosition[2].pos.y = 13;
-	modulPosition[2].pos.disp_char = '\\';
-	modulPosition[3].pos.x = 11;
-	modulPosition[3].pos.y = 14;
-	modulPosition[3].pos.disp_char = '>';
-	modulPosition[4].pos.x = 9;
-	modulPosition[4].pos.y = 15;
-	modulPosition[4].pos.disp_char = '/';
-	modulPosition[5].pos.x = 9;
-	modulPosition[5].pos.y = 13;
-	modulPosition[5].pos.disp_char = '\\';
-	modulPosition[6].pos.x = 10;
-	modulPosition[6].pos.y = 14;
-	modulPosition[6].pos.disp_char = '-';
+    newGamePos();
 }
+
+
 UserShip::~UserShip() {
 }
 void    UserShip::setXModulPosition(int x) {
@@ -142,6 +124,30 @@ bool UserShip::operator==(EnemyShip &e) const
 		}
 	}
 	return false;
+}
+
+void UserShip::newGamePos() {
+    modulPosition[0].pos.x = 10;
+    modulPosition[0].pos.y = 15;
+    modulPosition[0].pos.disp_char = '/';
+    modulPosition[1].pos.x = 9;
+    modulPosition[1].pos.y = 14;
+    modulPosition[1].pos.disp_char = '=';
+    modulPosition[2].pos.x = 10;
+    modulPosition[2].pos.y = 13;
+    modulPosition[2].pos.disp_char = '\\';
+    modulPosition[3].pos.x = 11;
+    modulPosition[3].pos.y = 14;
+    modulPosition[3].pos.disp_char = '>';
+    modulPosition[4].pos.x = 9;
+    modulPosition[4].pos.y = 15;
+    modulPosition[4].pos.disp_char = '/';
+    modulPosition[5].pos.x = 9;
+    modulPosition[5].pos.y = 13;
+    modulPosition[5].pos.disp_char = '\\';
+    modulPosition[6].pos.x = 10;
+    modulPosition[6].pos.y = 14;
+    modulPosition[6].pos.disp_char = '-';
 }
 
 

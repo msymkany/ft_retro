@@ -43,6 +43,7 @@ public:
 	void 	play_game();
 	void	apd_screen();
 	void 	init_graph();
+	void	init_win();
 	void 	take_live();
 	void	operator+=(int pt);
 	void	putRandomEnemy();
@@ -50,8 +51,10 @@ public:
 	void	game_over();
     void	putRandomStar();
     void    destroyObj(Bullet *missile);
+	void	new_game();
 
-    int get_script() const;
+
+	int get_script() const;
 
     void set_script(int _script);
 

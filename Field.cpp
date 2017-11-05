@@ -29,6 +29,7 @@ Field::~Field()
 	delwin(_field);
 	delwin(_info);
 	endwin();
+    delete User;
 	return;
 }
 
@@ -68,7 +69,6 @@ int Field::get_cycles() const
 void Field::take_live()
 {
 	_lives -= 1;
-	mvprintw(3, 15, "Lives %d", _lives); //test
 }
 
 void Field::operator+=(int pt)
@@ -77,7 +77,6 @@ void Field::operator+=(int pt)
 }
 
 //start game
-
 
 
 //graphics
@@ -91,38 +90,43 @@ void Field::init_graph()
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	nodelay(stdscr, TRUE);
-	halfdelay(1);
 	scrollok(stdscr, TRUE);
 
-	init_pair(1, COLOR_BLUE, COLOR_BLACK);
-	init_pair(2, COLOR_CYAN, COLOR_BLACK);
-	init_pair(3, COLOR_WHITE, COLOR_BLACK);
-	init_pair(4, COLOR_RED, COLOR_BLACK);
+    init_pair(1, COLOR_BLUE, COLOR_BLACK);
+    init_pair(2, COLOR_CYAN, COLOR_BLACK);
+    init_pair(3, COLOR_WHITE, COLOR_BLACK);
+    init_pair(4, COLOR_RED, COLOR_BLACK);
 
-	getmaxyx(stdscr, _playScreen.y, _playScreen.x);
-	_playScreen.y -= 5;
-	_infoScreen.y = 5;
-	_infoScreen.x = _playScreen.x;
-	_field = newwin(_playScreen.y, _playScreen.x, 5, 0);
-	_info = newwin(_infoScreen.y, _infoScreen.x, 0, 0);
-	box(_field, 0, 0);
-	box(_info, 0, 0);
-	wbkgd(_field, COLOR_PAIR(1));
-	wbkgd(_info, COLOR_PAIR(2));
-	keypad(_field, TRUE);
-	refresh();
-	wrefresh(_field);
-	wrefresh(_info);
-    t = clock();
+//    while ()
+    getmaxyx(stdscr, _playScreen.y, _playScreen.x);
+//	_playScreen.y -= 5;
+    _infoScreen.y = 5;
+    _infoScreen.x = _playScreen.x;
+    _field = newwin(_playScreen.y, _playScreen.x, 0, 0);
+    _info = newwin(_infoScreen.y, _infoScreen.x, 0, 0);
+   init_win();
+}
+
+void Field::init_win() {
+    box(_field, 0, 0);
+    box(_info, 0, 0);
+    wbkgd(_field, COLOR_PAIR(1));
+    wbkgd(_info, COLOR_PAIR(2));
+    keypad(_field, TRUE);
+    nodelay(stdscr, TRUE);
+    halfdelay(1);
+    refresh();
+    wrefresh(_field);
+    wrefresh(_info);
 }
 
 void Field::apd_screen()
 {
 	mvwprintw(_info, 2, 20, "Score: %d", _score);
-	mvwprintw(_info, 2, 45, "Lives: ");
-	for (int i = 0; i < _lives; i++)
-		waddstr(_info, " @ ");
+    mvwprintw(_info, 2, 45, "Lives: ");
+    mvwprintw(_info, 2, 52, "                                ");
+    for (int i = 0; i < _lives; i++)
+        mvwprintw(_info, 2, 52 + i * 3, " @ ");
 	wrefresh(_info);
 	wrefresh(_field);
 	refresh();
@@ -169,7 +173,7 @@ void Field::play_game() {
             this->enemy->cleanFly(this->enemy, this->random);
             this->enemy->fly(this->enemy, _playScreen);
         }
-		wattron(_field, COLOR_PAIR(3));
+        wattron(_field, COLOR_PAIR(3));
 		User->putModul(_field, User->getModulSize());
 		wattroff(_field, COLOR_PAIR(3));
         this->destroyObj(User->getMissile());
@@ -197,8 +201,8 @@ void Field::putRandomEnemy() {
                 if (this->random[r] != 1) {
                     this->enemy[r].getModulPosition()->pos.x = this->_playScreen.x - 2;
                     this->enemy[r].getModulPosition()->pos.y = rand() % (_playScreen.y - 6) + 6;
+                    this->random[r] = 1;
                 }
-                this->random[r] = 1;
                 i++;
             }
         }
@@ -215,6 +219,7 @@ void Field::checkLives() {
 			{
 				take_live();
 				enemy[i].set_stoper(0);
+                random[i] = 0;
 				if (!_lives)
 					return ;
 			}
@@ -224,7 +229,9 @@ void Field::checkLives() {
 
 void Field::game_over() {
 
-	int in_char;
+	int in_char = 0;
+    nocbreak();
+    keypad(_stdwin, true);
 	wclear(_field);
 	wclear(_info);
 	clear();
@@ -232,15 +239,21 @@ void Field::game_over() {
 	wrefresh(_field);
 	box(stdscr, 0, 0);
 //	bkgd(COLOR_PAIR(1));
-	mvwprintw(_stdwin, 14, 20, "Game over");
-	refresh();
-	usleep(1000000); // 10 ms
-	in_char = wgetch(_stdwin);
-	halfdelay(30);
-	if (in_char == 'q')
-		return;
-//	delwin(_field);
-//	delwin(_info);
+    mvwprintw(_stdwin, 14, 20, "Game over");
+    mvwprintw(_stdwin, 16, 20, "Your score is: %d", _score);
+    mvwprintw(_stdwin, 18, 20, "Press 'q' to quit");
+    mvwprintw(_stdwin, 20, 20, "Press 'r' to start a new game");
+    refresh();
+    usleep(1000000); // 10 ms
+	while (1)
+    {
+        in_char = getch();
+        if (in_char == 'q')
+            return ;
+        if (in_char == 'r')
+            break ;
+    }
+    new_game();
 }
 
 void Field::putRandomStar() {
@@ -264,10 +277,10 @@ clock_t Field::getT() const {
     return t;
 }
 
+
 void Field::setT(clock_t t) {
     Field::t = t;
 }
-
 
 int Field::get_script() const {
     return _script;
@@ -282,7 +295,6 @@ void Field::destroyObj(Bullet *missile) {
     int j;
 
     i = 0;
-//    j = 0;
     while (i < 200) {
         j = 0;
         while (j < 150){
@@ -298,5 +310,22 @@ void Field::destroyObj(Bullet *missile) {
         }
         i++;
     }
+}
+
+void Field::new_game() {
+    _score = 0;
+    _lives = _maxlives;
+    for (int i = 0; i < 150; i++)
+    {
+        random[i] = 0;
+        enemy[i].set_stoper(0);
+    }
+    mvwprintw(_stdwin, 14, 20, "         ");
+    mvwprintw(_stdwin, 16, 20, "                 ");
+    mvwprintw(_stdwin, 18, 20, "                 ");
+    mvwprintw(_stdwin, 20, 20, "                               ");
+    User->newGamePos();
+    init_win();
+    play_game();
 }
 
